@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Stock Viewr</title>
+    <link rel="icon" type="image/x-icon" href="assets/icons/stock-80.png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Boldonse&display=swap');
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    
+</head>
+<body>
+    <div id="header">
+        <img src="assets/icons/stock-80.png">
+        <h1>Stock Viewr</h1>
+        
+        <div id="nifty" class="header-boxes">
+            <p class="points" id="nifty-points">23490</p>
+            <p>NIFTY</p>
+        </div>
+
+        <div id="sensex" class="header-boxes">
+            <p class="points" id="sensex-points">77340</p>
+            <p>SENSEX</p>
+        </div>
+
+        <div id="date-time-box">
+            <p id="time">03:55 pm</p>
+            <p id="date">23 March 2023</p>
+        </div>
+        <button id="profile-box" onclick="openNav()"><img src="assets/icons/profile-48.png"></button>
+    </div>
+    <div id="menu">
+        <button onclick="fhome()">Home</button>
+        <button onclick="fabout()">About</button>
+        <button onclick="fprofile()">Profile</button>
+        <button onclick="fcomplaints()">Complaints</button>
+        <button onclick="ftc()">T&C</button>
+
+    </div>
+
+    <div id="side-profile-menu">
+        <button onclick="closeNav()"><img src="assets/icons/cross-30.png"></button>
+        <p>Farzeen Ilyas Zargar</p>
+        <img id="pfp" src="assets/images/pfp1.jpg">
+        <p>New Delhi, India</p>
+    </div>
+
+    <div id="home">
+        
+    
+        <div id="all-content">
+            <div id="graph">
+                <p id="stock-name">Stock Name</p>
+                <div class="chart-container">
+                    <canvas id="stockChart"></canvas>
+                </div>
+                <div id="error-message"></div>
+
+            </div>
+            <div id="asks">
+                <div class="stock-input">
+                    <label for="symbol">Enter Stock Symbol (e.g., TATAMOTORS.NS for NSE or TATAMOTORS.BSE for BSE):</label>
+                    <input type="text" id="symbol" placeholder="">
+                    <button id="getStockData">Get Stock Data</button>
+                </div>
+            <div id="error-message"></div>
+
+            </div>
+    
+        </div>
+    </div>
+
+    <div id="about">
+        <h1>About Us</h1>
+        <p>Welcome to Stock Viewr, your go-to platform for easily tracking and analyzing stock data. Developed by Farzeen and Piyush as part of our web programming class project, Stock Viewr aims to provide users with real-time access to stock market information, financial charts, and in-depth market analysis.</p>
+        <p>Our mission is simple: to create a user-friendly tool that helps individuals stay informed about the stock market, make educated decisions, and track their investments with ease. Whether you're a beginner or an experienced trader, Stock Viewr offers valuable insights to guide your market journey.</p>
+        <p>Farzeen and Piyush, both passionate about programming and finance, came together to develop Stock Viewr as a way to combine our skills in web development with our interest in the stock market. As students in our web programming class, we saw an opportunity to create a platform that could help people manage their stock market research more efficiently.</p>
+        <p>We aim to empower users by giving them the tools to track and analyze their investments, helping them make smarter financial decisions. Stock Viewr was built with simplicity, speed, and accuracy in mind, providing a smooth user experience for everyone from beginners to seasoned investors.</p>
+              
+            
+        <div style="display: flex; justify-content:space-around;">
+            <div>
+                <img src="assets/images/pfp1.jpg">
+                <p>Farzeen Ilyas Zargar (23BCT0247)</p>
+            </div>
+            <div>
+                <img src="assets/images/pfp2.gif">
+                <p>Piyush Watts (23BCI0234)</p>
+            </div>
+            
+        </div>
+        
+
+    </div>
+    
+    <div id="profile">
+        <h1>Profile</h1>
+        <div id="prof">
+            <div id="pfp-prof">
+                <img src="assets/images/pfp1.jpg">
+            </div>
+            <div id="info-prof">
+                <p>Name: Farzeen Ilyas Zargar</p>
+                <p>Location: New Delhi, India</p>
+                <p>Undergrad at VIT Vellore</p>
+            </div>
+            
+        </div>
+        
+    </div>
+
+    <div id="complaints">
+        <h1>Complaints</h1>
+        <form>
+            <form id="form">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required placeholder="Enter your full name">
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email address">
+                
+                <label for="complaint">Complaint:</label>
+                <textarea id="complaint" name="complaint" rows="4" required placeholder="Describe your complaint"></textarea>
+                
+                <label for="file">Attach File (Optional):</label>
+                <input type="file" id="file" name="file">
+                
+                <button type="submit" class="submit-btn">Submit</button>
+            </form>
+        </form>
+
+    </div>
+
+    <div id="t-c">
+        <h1>Terms and Conditions</h1>
+        <p>Welcome to Stock Viewr, a stock viewing platform. By accessing or using our platform, you agree to comply with and be bound by the following Terms and Conditions. Please read them carefully. If you do not agree with any part of these terms, you must not use our platform.</p>
+        <p>1. Acceptance of Terms By using the Stock Viewr website and its associated services, you agree to comply with these Terms and Conditions. We reserve the right to update, modify, or amend these terms at any time, and such changes will be effective immediately upon posting to the platform. We encourage you to periodically review these Terms and Conditions to stay informed of any updates.</p>
+        <p>2. Services Provided Stock Viewr provides access to real-time stock data, financial charts, news, market analytics, and other stock-related information (the "Services"). We do not offer investment advice or recommendations, and the information provided on our platform is solely for informational purposes.</p>
+        <p>3. Use of the Platform You agree to use the platform and its Services for lawful purposes only. You must not:
+        <li>Violate any applicable laws or regulations.</li>
+        <li>Engage in any conduct that could harm the platform’s reputation or functionality.</li> 
+        <li>Attempt to access or manipulate any part of the platform's data or systems that you are not authorized to use.</li>   
+        <li>Use the platform to promote spam, viruses, or other harmful content.</li> 
+        <p>4. Account Registration To access certain features or Services on the platform, you may be required to register for an account. You agree to provide accurate, complete, and current information during the registration process and to maintain the security of your account credentials. You are responsible for all activities that occur under your account, whether authorized or unauthorized.</p>    
+        <p>5. Data Accuracy While we strive to provide accurate, timely, and reliable data, Stock Viewr does not guarantee the accuracy or completeness of the information presented on the platform. All stock data, news, and analytics are subject to change and should be verified independently. We are not liable for any losses or damages resulting from reliance on inaccurate information.</p>
+        <p>6. Third-Party Links and Content Our platform may contain links to third-party websites, products, or services. These links are provided for your convenience, and we do not endorse or control these third-party websites. Stock Viewr is not responsible for the content, privacy policies, or practices of third-party sites.</p> 
+        <p>7. Disclaimer of Warranties The Services provided on Stock Viewr are offered "as is" and "as available," without warranties of any kind, either express or implied, including but not limited to the accuracy, completeness, or timeliness of the information, or that the platform will be error-free or uninterrupted. You agree that your use of the platform is at your sole risk.</p>  
+        <p>8. Limitation of Liability To the fullest extent permitted by applicable law, Stock Viewr and its affiliates, officers, employees, and agents shall not be liable for any direct, indirect, incidental, special, consequential, or punitive damages arising out of your use of the platform or its Services, even if we have been advised of the possibility of such damages.</p>
+            
+    </div>
+
+    <div id="footer">
+        <p>Copyright © 2025. All rights reserved.</p>
+    </div>
+    
+</body>
+<style>
+    *
+    {
+        font-family: "Boldonse", system-ui;
+    }
+
+    body
+    {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        margin: 0px;
+        align-items: center;    
+    }
+
+    #header
+    {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 60px;
+        width: 90vw;
+        margin-top: 10px;
+        font-size: 10px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    #header h1
+    {
+        width: 50vw;
+        text-align: left;
+    }
+
+    #header img
+    {
+        height: 50px;
+        margin: 5px;
+    }
+
+    .header-boxes
+    {
+
+        border: 2px solid black;
+        height: 60px;
+        width: 8vw;
+        padding: 0;
+        line-height: 10px;
+
+    }
+    .points
+    {
+        font-size: 14px;
+        color: purple;  
+    }
+    #profile-box
+    {
+        border: none;
+        background-color: white;
+        height: 50px;
+        width: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    #side-profile-menu
+    {
+        background-color: black;
+        color: white;
+        height: 100vh;
+        width: 0px;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        transition: 0.5s;
+    }
+    #side-profile-menu button
+    {
+        background-color: black;
+        border: none;
+        margin-top: 10px;
+
+    }
+    #pfp
+    {
+        height: 100px;
+    }
+
+
+    #menu
+    {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        width: 90vw;
+        background-color: black;
+        color: white;
+        font-size: 8px;
+    }
+
+    #menu button
+    {
+        background-color: black;
+        color: white;
+        border: none;
+    }
+
+    #menu button:hover
+    {
+        color: white;
+        text-shadow: 1px 1px rgb(181, 175, 175);
+
+    }
+    #menu button:active
+    {
+        color: white;
+        text-shadow: 1px 1px white;
+    }
+    
+    #content
+    {
+
+        border: 1px solid black;
+        width: 90vw;
+        display: flex;
+        flex-direction: row;
+    }
+
+    #sensex-graph-box
+    {
+        border: 1px solid black;
+        width: 45vw;
+        height: 400px;
+    }
+    #nifty-graph-box
+    {
+        border: 1px solid black;
+        width: 45vw;
+        height: 400px;
+    }
+
+    #all-content
+    {
+        border: 1px solid black;
+        width: 90vw;
+        margin-top: 10px;
+        margin-bottom: 30px;
+        height: 600px;
+        display: flex;
+        flex-direction: row;
+    }
+
+    .chart-container {
+        text-align: center;
+        width: 50vw;
+
+    }
+
+    #graph
+    {
+        border: 1px solid black;
+        width: 65vw;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    #asks
+    {
+        border: 1px solid black;
+        width: 25vw;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        font-size: 15px;
+
+    }
+
+    #asks input
+    {
+        width: 20vw;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        height: 30px;
+        font-size: 15px;
+    }
+
+    #asks button
+    {
+        background-color: black;
+        color: white;
+        border: none;
+        padding: 10px;
+    }
+
+    #profile
+    {
+        display: none;
+        margin-bottom: 20px;
+        
+        width: 80vw;
+    }
+
+    #prof
+    {
+        display: flex;
+        flex-direction: row;
+        width: 80vw;
+
+    }
+
+    #pfp-prof
+    {
+        width: 20vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    #pfp-prof img
+    {
+        height: 150px;
+
+
+    }
+
+    #info-prof
+    {
+        width: 60vw;
+        text-align: left;
+    }
+
+    #list-of-stocks
+    {
+        margin-top: 10px;
+        border: 1px solid black;
+    }
+
+    #complaints
+    {
+        display: none;
+        margin-bottom: 30px;
+    }
+
+
+
+    label 
+    {
+        margin-top: 10px;
+        display: block;
+        text-align: left;
+    }
+
+    input, textarea 
+    {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        margin-bottom: 10px;
+        border: 1px solid black;
+        border-radius: 4px;
+        font-size: 10px;
+        letter-spacing: 1px;
+        resize: none;
+        font-weight: 1;
+    }
+
+    form button
+    {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        background-color: black;
+        color: white;
+        border: none;
+        padding: 10px 20px 10px 20px;
+    }
+
+    form button:hover
+    {
+        background-color: white;
+        color: black;
+        border: 1px solid black;
+    }
+
+    #about
+    {
+        width: 80vw;
+
+        display: none;
+        margin-top: 0px;
+
+    }
+
+    #about p
+    {
+        text-align: justify;
+        
+    }
+
+    #about img
+    {
+        height: 200px;
+        margin-top: 40px;
+    }
+
+    #t-c
+    {
+        width: 80vw;
+
+        display: none;
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+    #t-c p, li
+    {
+        text-align: justify;
+
+    }
+
+    #footer
+    {
+        background-color: black;
+        color: white;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 10px;
+        font-size: 12px;
+        width: 100vw;
+        font-weight: 200;
+    }
+
+</style>
+
+<script>
+    let time = document.getElementById("time");
+    let date = document.getElementById("date");
+    setInterval(()=> 
+    {
+        let d = new Date();
+        date.innerHTML = d.toLocaleDateString();
+        time.innerHTML = d.toLocaleTimeString();
+
+    }, 1000)
+
+    let home = document.getElementById("home");
+    let tc = document.getElementById("t-c");
+    let about = document.getElementById('about');
+    let complaints = document.getElementById("complaints");
+    let profile = document.getElementById("profile");
+
+
+    
+    function fhome()
+    {
+        if (home) {
+            if (home.style.display == 'none') {
+                home.style.display = 'block';
+                tc.style.display = 'none';
+                about.style.display = 'none';
+                complaints.style.display = 'none';
+                profile.style.display = 'none';
+            }
+            else {
+                home.style.display = 'none';
+            }
+        }
+    }
+
+    function ftc()
+    {
+        if (tc) {
+            if (tc.style.display == 'none') {
+                tc.style.display = 'block';
+                home.style.display = 'none';
+                about.style.display = 'none';
+                complaints.style.display = 'none';
+                profile.style.display = 'none';
+            }
+            else {
+                tc.style.display = 'none';
+            }
+        }
+    }
+
+    function fabout()
+    {
+        if (about) {
+            if (about.style.display == 'none') {
+                about.style.display = 'block';
+                tc.style.display = 'none';
+                home.style.display = 'none';
+                complaints.style.display = 'none';
+                profile.style.display = 'none';
+            }
+            else {
+                about.style.display = 'none';
+            }
+        }
+    }
+    function fcomplaints()
+    {
+        if (complaints) {
+            if (complaints.style.display == 'none') {
+                complaints.style.display = 'block';
+                tc.style.display = 'none';
+                about.style.display = 'none';
+                home.style.display = 'none';
+                profile.style.display = 'none';
+            }
+            else {
+                complaints.style.display = 'none';
+            }
+        }
+    }
+
+    function fprofile()
+    {
+        if (profile) {
+            if (profile.style.display == 'none') {
+                profile.style.display = 'block';
+                tc.style.display = 'none';
+                about.style.display = 'none';
+                complaints.style.display = 'none';
+                home.style.display = 'none';
+            }
+            else {
+                profile.style.display = 'none';
+            }
+        }
+    }
+
+
+
+    function openNav() 
+    {
+        document.getElementById("side-profile-menu").style.width = "300px";
+    }
+
+    function closeNav() 
+    {
+        document.getElementById("side-profile-menu").style.width = "0";
+    }
+
+
+    const apiKey = "TXRALTIX2IZQ5D8F";
+    const baseUrl = "https://www.alphavantage.co/query?";
+
+    async function fetchStockData(symbol) 
+    {
+        const url = `${baseUrl}function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${apiKey}&outputsize=compact`;
+        
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+
+            if (data["Error Message"]) 
+            {
+                displayError("Stock symbol not found.");
+                return;
+            }
+
+            if (data["Time Series (Daily)"]) 
+            {
+                const stockData = data["Time Series (Daily)"];
+                const labels = [];
+                const prices = [];
+
+                for (let date in stockData) 
+                {
+                    labels.push(date);
+                    prices.push(stockData[date]["4. close"]);
+                }
+
+                displayChart(labels, prices);
+            } 
+            else 
+            {
+                displayError("Unable to fetch stock data.");
+            }
+        } 
+        catch (error) 
+        {
+            console.error("Error fetching stock data:", error);
+            displayError("An error occurred while fetching the stock data.");
+        }
+    }
+
+    function displayChart(labels, prices) 
+    {
+        const ctx = document.getElementById('stockChart').getContext('2d');
+
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels.reverse(),
+                datasets: [{
+                    label: 'Stock Price (INR)',
+                    data: prices.reverse(),
+                    borderColor: 'rgba(255, 0, 0, 1)',
+                    backgroundColor: 'rgba(255, 0, 0, 0.2)',
+                    fill: true,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: {
+                    x: {
+                        type: 'category',
+                        title: {
+                            display: true,
+                            text: 'Date'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Price (INR)'
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    function displayError(message) 
+    {
+        const errorMessageDiv = document.getElementById('error-message');
+        errorMessageDiv.textContent = message;
+    }
+
+    document.getElementById("getStockData").addEventListener("click", () => {
+        const symbol = document.getElementById("symbol").value.trim();
+        if (symbol) 
+        {
+            document.getElementById("stock-name").innerHTML = symbol;
+            fetchStockData(symbol);
+        } 
+        else 
+        {
+            displayError("Please enter a stock symbol.");
+        }
+    });
+
+</script>
+</html>
